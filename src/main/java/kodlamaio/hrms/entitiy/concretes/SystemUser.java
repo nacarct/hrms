@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class SystemUser{
     @Id
     @GeneratedValue
-    @Column(name = "")
+    @Column(name = "system_user_id")
     private int systemUserId;
 
     @Column(name = "first_name")

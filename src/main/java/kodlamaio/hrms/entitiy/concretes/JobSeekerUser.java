@@ -24,7 +24,7 @@ public class JobSeekerUser{
     private String citizenId;
 
     @Column(name = "year_of_birth")
-    private short yearOfBirth;
+    private String yearOfBirth;
 
     @Column(name = "user_id")
     private int userId;
