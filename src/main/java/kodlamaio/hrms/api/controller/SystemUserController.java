@@ -1,6 +1,7 @@
 package kodlamaio.hrms.api.controller;
 
 import kodlamaio.hrms.business.abstracts.SystemUserService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.entitiy.concretes.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ public class SystemUserController {
     }
 
     @GetMapping("/getall")
-    public List<SystemUser> getAll(){
+    public DataResult<List<SystemUser>> getAll(){
         return systemUserService.getAll();
     }
 

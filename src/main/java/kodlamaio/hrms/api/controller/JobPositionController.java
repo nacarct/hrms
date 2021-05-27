@@ -1,6 +1,8 @@
 package kodlamaio.hrms.api.controller;
 
 import kodlamaio.hrms.business.abstracts.JobPositionService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entitiy.concretes.JobPosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +23,12 @@ public class JobPositionController {
     }
 
     @GetMapping("/getall")
-    public List<JobPosition> getAll(){
+    public DataResult<List<JobPosition>> getAll(){
         return jobPositionService.getAll();
+    }
+
+    @GetMapping("/add")
+    public Result add(JobPosition jobPosition){
+        return this.jobPositionService.add(jobPosition);
     }
 }

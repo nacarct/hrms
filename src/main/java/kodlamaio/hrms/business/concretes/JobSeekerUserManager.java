@@ -1,6 +1,7 @@
 package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.JobSeekerUserService;
+import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.dataAccess.abstracts.JobSeekerUserDao;
 import kodlamaio.hrms.entitiy.concretes.JobSeekerUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,18 @@ public class JobSeekerUserManager implements JobSeekerUserService {
     }
 
     @Override
-    public List<JobSeekerUser> getAll() {
-        return jobSeekerUserDao.findAll();
+    public DataResult<List<JobSeekerUser>> getAll() {
+        return new SuccessDataResult<List<JobSeekerUser>>(jobSeekerUserDao.findAll());
+    }
+
+    @Override
+    public Result add(JobSeekerUser jobSeekerUser) {
+        try{
+            jobSeekerUserDao.save(jobSeekerUser);
+            return new SuccessResult("İş arayan bilgisi eklendi.");
+        }
+        catch (Exception e){
+            return new ErrorResult("İş arayan bilgisi eklenemedi. Hata : " +e.toString());
+        }
     }
 }

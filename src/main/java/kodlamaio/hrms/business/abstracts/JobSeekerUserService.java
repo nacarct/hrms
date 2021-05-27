@@ -1,9 +1,12 @@
 package kodlamaio.hrms.business.abstracts;
 
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entitiy.concretes.JobSeekerUser;
 
 import java.util.List;
 
 public interface JobSeekerUserService {
-    List<JobSeekerUser> getAll();
+    DataResult<List<JobSeekerUser>> getAll();
+    Result add(JobSeekerUser jobSeekerUser);
 }

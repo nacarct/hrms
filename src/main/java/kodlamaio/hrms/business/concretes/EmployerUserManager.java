@@ -1,6 +1,7 @@
 package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.EmployerUserService;
+import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerUserDao;
 import kodlamaio.hrms.entitiy.concretes.EmployerUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,17 @@ public class EmployerUserManager implements EmployerUserService {
     }
 
     @Override
-    public List<EmployerUser> getAll() {
-        return employerUserDao.findAll();
+    public DataResult<List<EmployerUser>> getAll() {
+        return new SuccessDataResult<List<EmployerUser>>(employerUserDao.findAll());
+    }
+
+    @Override
+    public Result add(EmployerUser employerUser) {
+        try{
+            return new SuccessResult("İş veren eklendi.");
+        }
+        catch (Exception e){
+            return new ErrorResult("İş veren eklenemedi. Hata : " + e.toString());
+        }
     }
 }

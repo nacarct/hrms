@@ -1,6 +1,8 @@
 package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.SystemUserService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.SystemUserDao;
 import kodlamaio.hrms.entitiy.concretes.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ public class SystemUserManager implements SystemUserService {
     }
 
     @Override
-    public List<SystemUser> getAll() {
-        return systemUserDao.findAll();
+    public DataResult<List<SystemUser>> getAll() {
+        return new SuccessDataResult<List<SystemUser>>(systemUserDao.findAll());
     }
 }

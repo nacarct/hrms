@@ -1,6 +1,7 @@
 package kodlamaio.hrms.api.controller;
 
 import kodlamaio.hrms.business.abstracts.JobSeekerUserService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.entitiy.concretes.JobSeekerUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ public class JobSeekerUserController {
     }
 
     @GetMapping("/getall")
-    public List<JobSeekerUser> getAll(){
+    public DataResult<List<JobSeekerUser>> getAll(){
         return jobSeekerUserService.getAll();
     }
 }
