@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface JobSeekerUserService {
     DataResult<List<JobSeekerUser>> getAll();
-    Result add(JobSeekerUser jobSeekerUser);
+    Result add(JobSeekerUser jobSeekerUser,String rePassword);
+    boolean getJobSeekerUserByCitizenId(String citizenId);
+    boolean getJobSeekerUserByUserEmail(String email);
 }

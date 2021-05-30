@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class JobSeekerUser{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "job_seeker_user_id")
     private int jobSeekerUserId;
 
@@ -26,8 +26,8 @@ public class JobSeekerUser{
     @Column(name = "year_of_birth")
     private String yearOfBirth;
 
-    @Column(name = "user_id")
-    private int userId;
+    //@Column(name = "user_id")
+    //private int userId;
 
     @Column(name = "email_status")
     private boolean emailStatus;
@@ -35,4 +35,7 @@ public class JobSeekerUser{
     @Column(name = "citizen_id_status")
     private boolean citizenIdStatus;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

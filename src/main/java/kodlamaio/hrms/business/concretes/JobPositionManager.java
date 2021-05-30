@@ -27,11 +27,41 @@ public class JobPositionManager implements JobPositionService {
     @Override
     public Result add(JobPosition jobPosition) {
         try{
+            if (jobPositionNameIsExist(jobPosition.getJobPositionName()))
+                return new ErrorResult("İş pozisyonu sistemde var!");
+
             jobPositionDao.save(jobPosition);
             return new SuccessResult("İş Pozisyonu eklendi.");
         }
         catch (Exception e){
             return new ErrorResult("İş Pozisyonu eklenemedi. Hata : " + e.toString());
         }
+    }
+
+    @Override
+    public boolean jobPositionNameIsExist(String jobPositionName) {
+        var result=false;
+
+        try{
+            if (this.jobPositionDao.getJobPositionByJobPositionName(jobPositionName).getJobPositionName().length()>0)
+                result=true;
+            else
+                result=false;
+        }
+        catch (Exception e){
+            return false;
+        }
+
+        return result;
+    }
+
+    @Override
+    public DataResult<JobPosition> getJobPositionByJobPositionName(String jobPositionName) {
+        return new SuccessDataResult<JobPosition>(this.jobPositionDao.getJobPositionByJobPositionName(jobPositionName));
+    }
+
+    @Override
+    public DataResult<JobPosition> getJobPositionByJobPositionId(int jobPositionId) {
+        return new SuccessDataResult<JobPosition>(this.jobPositionDao.getJobPositionByJobPositionId(jobPositionId));
     }
 }

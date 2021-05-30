@@ -28,10 +28,21 @@ public class UserManager implements UserService {
     public Result add(User user) {
         try{
             userDao.save(user);
-            return new SuccessResult("Kullanıcı eklenndi.");
+            return new SuccessResult("Kullanıcı eklendi.");
         }
         catch (Exception e){
             return new ErrorResult("Kullanıcı eklenemedi. Hata : " + e.toString());
         }
+    }
+
+    @Override
+    public boolean getUserByEmail(String email) {
+        var result=false;
+        if (this.userDao.getUserByEmail(email).getEmail().length()>0)
+            result=true;
+        else
+            result=false;
+
+        return result;
     }
 }

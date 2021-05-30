@@ -8,5 +8,8 @@ import java.util.List;
 
 public interface EmployerUserService {
     DataResult<List<EmployerUser>> getAll();
-    Result add(EmployerUser employerUser);
+    Result add(EmployerUser employerUser, String rePassword);
+    boolean getEmployerUserByUserEmail(String email);
+    DataResult<EmployerUser> getEmployerUserByCompanyName(String companyName);
+    DataResult<EmployerUser> getEmployerUserByEmployerUserId(int employerUserId);
 }

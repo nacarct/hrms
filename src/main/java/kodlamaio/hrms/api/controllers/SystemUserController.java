@@ -1,4 +1,4 @@
-package kodlamaio.hrms.api.controller;
+package kodlamaio.hrms.api.controllers;
 
 import kodlamaio.hrms.business.abstracts.SystemUserService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
