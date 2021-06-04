@@ -3,6 +3,7 @@ package kodlamaio.hrms.entitiy.concretes;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,9 +27,6 @@ public class JobSeekerUser{
     @Column(name = "year_of_birth")
     private String yearOfBirth;
 
-    //@Column(name = "user_id")
-    //private int userId;
-
     @Column(name = "email_status")
     private boolean emailStatus;
 
@@ -38,4 +36,7 @@ public class JobSeekerUser{
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "jobSeekerUser")
+    private List<Resume> resumes;
 }

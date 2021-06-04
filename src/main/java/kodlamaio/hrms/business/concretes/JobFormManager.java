@@ -18,31 +18,28 @@ import java.util.stream.Collectors;
 public class JobFormManager implements JobFormService {
 
     private JobFormDao jobFormDao;
-    private ModelMapper modelMapper;
 
     @Autowired
-    public JobFormManager(JobFormDao jobFormDao, ModelMapper modelMapper) {
+    public JobFormManager(JobFormDao jobFormDao) {
         this.jobFormDao = jobFormDao;
-        this.modelMapper=modelMapper;
     }
 
     @Override
     public DataResult<List<JobFormDto>> getAll() {
-        return new SuccessDataResult<List<JobFormDto>>(this.jobFormDao.getJobFormByActive(true).stream().map(this::convertToDto).collect(Collectors.toList()));
-        //return new SuccessDataResult<List<JobForm>>(this.jobFormDao.findAll());
+        return new SuccessDataResult<List<JobFormDto>>(this.jobFormDao.getJobFormDetails());
     }
 
     @Override
     public DataResult<List<JobFormDto>> getAllDateSorted(boolean sortType) {
         if (sortType)
-            return new SuccessDataResult<List<JobFormDto>>(this.jobFormDao.getJobFormByActiveOrderByFormDateAsc(true).stream().map(this::convertToDto).collect(Collectors.toList()));
-        else
-            return new SuccessDataResult<List<JobFormDto>>(this.jobFormDao.getJobFormByActiveOrderByFormDateDesc(true).stream().map(this::convertToDto).collect(Collectors.toList()));
+            return new SuccessDataResult<List<JobFormDto>>(this.jobFormDao.getJobFormDetailsOrderByDesc());
+
+        return new SuccessDataResult<List<JobFormDto>>(this.jobFormDao.getJobFormDetailsOrderByASC());
     }
 
     @Override
     public DataResult<List<JobFormDto>> getCompanyForms(String companyName) {
-        return new SuccessDataResult<List<JobFormDto>>(this.jobFormDao.getJobFormByActiveAndEmployerUserCompanyName(true,companyName).stream().map(this::convertToDto).collect(Collectors.toList()));
+        return new SuccessDataResult<List<JobFormDto>>(this.jobFormDao.getJobFormDetailsByCompanyName(""));
     }
 
     @Override
@@ -52,8 +49,6 @@ public class JobFormManager implements JobFormService {
                 jobForm.getCity().getCityName()=="" || jobForm.getPositionCount()==0
         )
             return new ErrorResult("Lütfen zorunlu alanları doldurunuz.");
-
-
 
         this.jobFormDao.save(jobForm);
 
@@ -68,12 +63,5 @@ public class JobFormManager implements JobFormService {
         this.jobFormDao.save(jobForm);
         return new SuccessResult("İş Formu kapatıldı!");
     }
-
-    private JobFormDto convertToDto(JobForm jobForm) {
-        JobFormDto jobFormDto = modelMapper.map(jobForm, JobFormDto.class);
-        jobFormDto.setCompanyName(jobForm.getEmployerUser().getCompanyName());
-        return jobFormDto;
-    }
-
 
 }

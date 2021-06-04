@@ -26,9 +26,4 @@ public class HrmsApplication {
 				.build();
 	}
 
-	@Bean
-	public ModelMapper modelMapper(){
-		return new ModelMapper();
-	}
-
 }

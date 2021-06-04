@@ -51,6 +51,10 @@ public class JobFormController {
         return this.jobFormService.getAllDateSorted(sortType);
     }
 
+    public DataResult<List<JobFormDto>> getJobFormDetailsByCompanyName(@RequestParam String companyName){
+        return this.jobFormService.getCompanyForms(companyName);
+    }
+
     @GetMapping("/closeJobForm")
     public Result closeJobForm(@RequestParam int jobId){
         return this.jobFormService.closeJobForm(jobId);
